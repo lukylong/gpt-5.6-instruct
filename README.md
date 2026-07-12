@@ -1,4 +1,4 @@
-# Codex 破限 5.6 / gpt-5.6-sol-instruct
+# Codex gpt-5.6 破甲提示词 / gpt-5.6-sol-instruct
 
 **中文** | [English](#english-version)
 
@@ -22,6 +22,12 @@
 
 当前版本：`v5`  
 SHA256：`02c018e5fac85500d4eb17904769a32b8b22971499c7f94e9ccc8bd6cc9e9104`
+
+### 效果截图
+
+| 官网下载与逆向任务执行 | `gpt-5.5 xhigh` 与 `gpt-5.6-sol xhigh` 效果对比 |
+|---|---|
+| ![官网下载与逆向任务执行效果](docs/images/test-official-download-reverse-engineering.jpg) | ![gpt-5.5 xhigh 与 gpt-5.6-sol xhigh 效果对比](docs/images/test-gpt55-vs-gpt56-sol-xhigh.jpg) |
 
 ## 破甲策略
 
@@ -82,12 +88,6 @@ short:   {"pass": 120}
 medium:  {"pass": 120}
 ```
 
-### 效果截图
-
-| 官网下载与逆向任务执行 | `gpt-5.5 xhigh` 与 `gpt-5.6-sol xhigh` 效果对比 |
-|---|---|
-| ![官网下载与逆向任务执行效果](docs/images/test-official-download-reverse-engineering.jpg) | ![gpt-5.5 xhigh 与 gpt-5.6-sol xhigh 效果对比](docs/images/test-gpt55-vs-gpt56-sol-xhigh.jpg) |
-
 记录文件：
 
 ```text
@@ -142,7 +142,7 @@ MIT
 
 ## English Version
 
-[中文](#codex-破限-56--gpt-56-sol-instruct) | **English**
+[中文](#codex-gpt-56-破甲提示词--gpt-56-sol-instruct) | **English**
 
 > A Codex CLI jailbreak prompt and test pack for `gpt-5.6-sol`, derived from [yynxxxxx/Codex-5.5-codex-instruct-5.5](https://github.com/yynxxxxx/Codex-5.5-codex-instruct-5.5).
 
