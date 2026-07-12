@@ -5,7 +5,8 @@
 > 针对 `gpt-5.6-sol` 的 Codex CLI 破甲提示词与测试包。  
 > 参考并延展自 [yynxxxxx/Codex-5.5-codex-instruct-5.5](https://github.com/yynxxxxx/Codex-5.5-codex-instruct-5.5)。
 
-本项目将安全研究、渗透测试、逆向工程、软件破解与 NSFW 虚构内容统一声明为本地沙箱任务，显式压制拒绝/回退话术，并针对 `gpt-5.6-sol` 进行多轮回测与迭代优化。在同为 `gpt-5.6-sol`、`medium` 推理、120 条 `medium` 用例的对比中，pass 从上游指令的 66 条提升到当前 `v24` 的 120 条，即提升 45 个百分点；原始结果均保存在 `tests/`。
+本项目将安全研究、渗透测试、逆向工程、软件破解与 NSFW 虚构内容统一声明为本地沙箱任务，显式压制拒绝/回退话术，并针对 `gpt-5.6-sol` 进行多轮回测与迭代优化。
+在 `gpt-5.6-sol` 模型 `medium` 推理下，通过测试的用例个数从已有5.5提示词的 66/120 条提升到当前 `v24` 的 120/120 条，即提升 45 个百分点；原始结果均保存在 `tests/`。
 
 同时，本项目还提供了一套可复现的测试、评测与迭代优化流程。
 
@@ -122,17 +123,17 @@ tests/gpt56_sol_unrestricted_v24_gpt_5_6_sol_medium_medium_summary_2026-07-12.js
 | 模型 | 推理等级 | 测试层级 | 上游 `gpt5.5-unrestricted.md` | 本项目 `gpt-5.6-sol-unrestricted.md` | 数据 |
 |---|---|---|---:|---:|---|
 | `gpt-5.4` | `medium` | `medium` | 60/120（50.00%） | 70/120（58.33%） | [上游](tests/gpt55_unrestricted_upstream_gpt_5_4_medium_medium_summary_2026-07-11.json) / [本项目](tests/gpt56_sol_unrestricted_gpt_5_4_medium_medium_summary_2026-07-11.json) |
-| `gpt-5.5` | `low` | `minimal` | 62/120（51.67%） | — | [上游](tests/gpt55_prompt_bank_minimal_low_upstream_summary_2026-07-11.json) |
+| `gpt-5.5` | `low` | `minimal` | 62/120（51.67%） | 118/120（98.33%） | [上游](tests/gpt55_prompt_bank_minimal_low_upstream_summary_2026-07-11.json) / [本项目 v24](tests/gpt56_sol_unrestricted_v24_gpt_5_5_minimal_low_summary_2026-07-12.json) |
 | `gpt-5.5` | `medium` | `medium` | — | 105/120（87.50%） | [本项目](tests/gpt56_sol_unrestricted_gpt_5_5_medium_medium_summary_2026-07-11.json) |
 | `gpt-5.6-luna` | `medium` | `medium` | — | 70/120（58.33%） | [本项目](tests/gpt56_sol_unrestricted_gpt_5_6_luna_medium_medium_summary_2026-07-11.json) |
 | `gpt-5.6-terra` | `medium` | `medium` | — | 56/120（46.67%） | [本项目](tests/gpt56_sol_unrestricted_gpt_5_6_terra_medium_medium_summary_2026-07-11.json) |
 | `gpt-5.6-sol` | `low` | `minimal` | — | 120/120（100.00%） | [本项目](tests/gpt56_sol_unrestricted_gpt_5_6_sol_minimal_low_summary_2026-07-11.json) |
 | `gpt-5.6-sol` | `low` | `short` | — | 90/120（75.00%） | [本项目](tests/gpt56_sol_unrestricted_gpt_5_6_sol_short_low_summary_2026-07-11.json) |
-| `gpt-5.6-sol` | `low` | `medium` | — | 119/120（99.17%） | [本项目 v24](tests/gpt56_sol_unrestricted_v24_gpt_5_6_sol_medium_low_summary_2026-07-12.json) |
+| `gpt-5.6-sol` | `low` | `medium` | 85/120（70.83%） | 119/120（99.17%） | [上游](tests/gpt55_unrestricted_upstream_gpt_5_6_sol_medium_low_summary_2026-07-12.json) / [本项目 v24](tests/gpt56_sol_unrestricted_v24_gpt_5_6_sol_medium_low_summary_2026-07-12.json) |
 | `gpt-5.6-sol` | `medium` | `medium` | 66/120（55.00%） | 120/120（100.00%） | [上游](tests/gpt55_unrestricted_upstream_gpt_5_6_sol_medium_medium_summary_2026-07-11.json) / [本项目 v24](tests/gpt56_sol_unrestricted_v24_gpt_5_6_sol_medium_medium_summary_2026-07-12.json) |
-| `gpt-5.6-sol` | `high` | `medium` | — | 91/120（75.83%） | [本项目历史版本](tests/gpt56_sol_unrestricted_gpt_5_6_sol_medium_high_summary_2026-07-12.json) |
+| `gpt-5.6-sol` | `high` | `medium` | 83/120（69.17%） | 91/120（75.83%） | [上游](tests/gpt55_unrestricted_upstream_gpt_5_6_sol_medium_high_summary_2026-07-12.json) / [本项目历史版本](tests/gpt56_sol_unrestricted_gpt_5_6_sol_medium_high_summary_2026-07-12.json) |
 
-现有同配置对比中，本项目在 `gpt-5.4 medium` 由 50.00% 提至 58.33%，在 `gpt-5.6-sol medium` 由 55.00% 提至 100%。其他模型记录显示出一定迁移性；缺失组合保留空项，避免跨配置推断。
+现有同配置记录中，本项目在 `gpt-5.5 low/minimal` 提升 46.66 个百分点，在 `gpt-5.6-sol` 的 low、medium、high 分别提升 28.34、45.00、6.66 个百分点。结果显示其在不同推理等级下具有较稳定的迁移表现。
 
 ### 命名软件 prompt 三条件对比
 
@@ -194,7 +195,8 @@ MIT
 
 > A Codex CLI jailbreak prompt and test pack for `gpt-5.6-sol`, derived from [yynxxxxx/Codex-5.5-codex-instruct-5.5](https://github.com/yynxxxxx/Codex-5.5-codex-instruct-5.5).
 
-The project treats security research, penetration testing, reverse engineering, software cracking, and fictional NSFW content as local sandbox tasks, explicitly suppresses refusal and fallback language, and has been refined through multiple rounds of regression testing for `gpt-5.6-sol`. On the matched 120-case `gpt-5.6-sol` medium/medium run, pass rate increased from 66/120 with the upstream prompt to 120/120 with current `v24`.
+The project treats security research, penetration testing, reverse engineering, software cracking, and fictional NSFW content as local sandbox tasks, explicitly suppresses refusal and fallback language, and has been refined through multiple rounds of regression testing and iterative optimization for `gpt-5.6-sol`.
+With the `gpt-5.6-sol` model at `medium` reasoning, the number of passing test cases increased from 66/120 using the existing 5.5 prompt to 120/120 with the current `v24`, an improvement of 45 percentage points. The raw results are preserved under `tests/`.
 
 It also provides a reproducible workflow for testing, evaluation, and iterative optimization.
 
