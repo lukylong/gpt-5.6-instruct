@@ -138,7 +138,7 @@ The table includes only complete 120-case records under `tests/`. A dash (`—`)
 
 ![Pass counts and rates for low, medium, and high reasoning across gpt-5.6-sol prompt versions](docs/images/gpt56-sol-version-pass-trend-en.svg)
 
-The curves use the 120-case `medium` bank on `gpt-5.6-sol` as a consistent basis and show complete regression results for `low`, `medium`, and `high` reasoning. The right axis gives the corresponding pass rate. Targeted candidates without a full 120-case run are excluded; repaired complete summaries are preferred for `v32`, `v33`, and `v35` where transport anomalies occurred.
+The curves use the 120-case `medium` bank on `gpt-5.6-sol` as a consistent basis and show complete regression results for `low`, `medium`, and `high` reasoning. Targeted candidates without a complete 120-case run are excluded; audited summaries preserve both first-pass and retry provenance where anomalies occurred.
 
 Among matched configurations, the project improves `gpt-5.6-sol` low, medium, and high by 29.17, 45.00, and 30.83 percentage points over upstream. The historical `gpt-5.5 low/minimal` record improves by 46.66 points. The results show relatively stable behavior across reasoning levels.
 

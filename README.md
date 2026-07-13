@@ -139,7 +139,7 @@ tests/gpt56_sol_unrestricted_v35_high_repaired_gpt_5_6_sol_medium_high_repaired_
 
 ![gpt-5.6-sol 提示词版本迭代中 low、medium、high 推理等级的通过案例数与通过率](docs/images/gpt56-sol-version-pass-trend.svg)
 
-曲线以 `gpt-5.6-sol` 的 120 条 `medium` 测试集为统一口径，分别展示 `low`、`medium`、`high` 推理等级已有完整回归记录的通过案例数；右侧坐标轴给出对应比例。未完成全部 120 条测试的定向候选未纳入，`v32`、`v33`、`v35` 优先采用修复传输异常后的完整汇总结果。
+曲线以 `gpt-5.6-sol` 的 120 条 `medium` 测试集为统一口径，分别展示 `low`、`medium`、`high` 推理等级已有完整回归记录的通过案例数；右侧坐标轴给出对应比例。未完成全部 120 条测试的定向候选未纳入，存在异常项时采用保留首轮与复测来源的审计汇总。
 
 现有同配置记录中，本项目在 `gpt-5.6-sol` low、medium、high 分别较上游提升 29.17、45.00、30.83 个百分点；`gpt-5.5 low/minimal` 的历史记录提升 46.66 个百分点。结果表明通用意图归一化在不同推理等级下保持了较稳定表现。
 
