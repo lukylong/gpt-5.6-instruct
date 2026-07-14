@@ -1,6 +1,15 @@
-name: Render Star History
+name: Deploy README and Star History
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+      - README_EN.md
+      - docs/images/**
+      - .github/scripts/build_pages_readme.py
+      - .github/workflows/sync-star-history.yml
   schedule:
     - cron: "23 */12 * * *"
   workflow_dispatch:
@@ -23,7 +32,7 @@ env:
 
 jobs:
   render-and-deploy:
-    name: Render with official source and deploy to Pages
+    name: Build bilingual README site and deploy to Pages
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
@@ -63,7 +72,10 @@ jobs:
           (cd "${STAR_HISTORY_SOURCE_DIR}" && pnpm install --frozen-lockfile)
           (cd "${STAR_HISTORY_SOURCE_DIR}/backend" && pnpm install --frozen-lockfile)
 
-      - name: Render official light and dark charts locally
+      - name: Install README renderer
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir Markdown==3.8.2
+
+      - name: Render charts and build README pages
         id: render
         shell: bash
         env:
@@ -137,24 +149,22 @@ jobs:
             cat "${server_log}" >&2
             exit 1
           fi
-          touch "${STAR_HISTORY_SITE_DIR}/.nojekyll"
+
+          python3 .github/scripts/build_pages_readme.py \
+            --repository "MDX-Tom/gpt-5.6-instruct" \
+            --pages-url "${STAR_HISTORY_PAGES_URL}" \
+            --output-dir "${STAR_HISTORY_SITE_DIR}"
 
           current_dir="$(mktemp -d)"
           changed=true
           if curl --fail --silent --location \
-              "${STAR_HISTORY_PAGES_URL}/star-history-light.svg" \
-              --output "${current_dir}/star-history-light.svg" && \
-            curl --fail --silent --location \
-              "${STAR_HISTORY_PAGES_URL}/star-history-dark.svg" \
-              --output "${current_dir}/star-history-dark.svg" && \
+              "${STAR_HISTORY_PAGES_URL}/manifest.sha256" \
+              --output "${current_dir}/manifest.sha256" && \
             cmp --silent \
-              "${STAR_HISTORY_SITE_DIR}/star-history-light.svg" \
-              "${current_dir}/star-history-light.svg" && \
-            cmp --silent \
-              "${STAR_HISTORY_SITE_DIR}/star-history-dark.svg" \
-              "${current_dir}/star-history-dark.svg"; then
+              "${STAR_HISTORY_SITE_DIR}/manifest.sha256" \
+              "${current_dir}/manifest.sha256"; then
             changed=false
-            echo "The deployed charts are already current."
+            echo "The deployed Pages site is already current."
           fi
           echo "changed=${changed}" >> "${GITHUB_OUTPUT}"
 
